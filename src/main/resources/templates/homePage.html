@@ -45,6 +45,24 @@
             width: 76px;
             height: 75px;
         }
+        .category-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 8px rgb(76, 165, 203);
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -101,19 +119,19 @@
     <h2 class="text-center mb-4">Categories</h2>
     <div class="row">
         <!-- Example Category Card -->
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-md-3 mb-4">
+            <div class="card category-card">
                 <img src="/catogoryPic/laptop.webp" class="card-img-top" alt="Category 1">
                 <div class="card-body">
                     <h5 class="card-title">Ноутбуки</h5>
                     <p class="card-text">Description of Category 1</p>
-                    <a href="#" class="btn btn-primary">Shop Category 1</a>
+                    <a href="/categories/2" class="btn btn-primary">Shop Category 1</a>
                 </div>
             </div>
         </div>
         <!-- Repeat for other categories -->
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-md-3 mb-4">
+            <div class="card category-card">
                 <img src="/catogoryPic/coffeMashine.webp" class="card-img-top" alt="Category 2">
                 <div class="card-body">
                     <h5 class="card-title">Бытовая техника</h5>
@@ -122,18 +140,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-md-3 mb-4">
+            <div class="card category-card">
                 <img src="/catogoryPic/phone.png" class="card-img-top" alt="Category 3">
                 <div class="card-body">
                     <h5 class="card-title">Мобильные телефоны</h5>
                     <p class="card-text">Description of Category 3</p>
-                    <a href="#" class="btn btn-primary">Shop Category 3</a>
+                    <a href="/categories/1" class="btn btn-primary">Shop Category 3</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
+        <div class="col-md-3 mb-4">
+            <div class="card category-card">
                 <img src="/catogoryPic/telek.webp" class="card-img-top" alt="Category 4">
                 <div class="card-body">
                     <h5 class="card-title">Телевизоры</h5>
@@ -142,18 +160,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="/catogoryPic/аксессуары.png.webp" class="card-img-top" alt="Category 4">
+        <div class="col-md-3 mb-4">
+            <div class="card category-card">
+                <img src="/catogoryPic/аксессуары.png.webp" class="card-img-top" alt="Category 5">
                 <div class="card-body">
                     <h5 class="card-title">Аксессуары</h5>
-                    <p class="card-text">Description of Category 4</p>
-                    <a href="#" class="btn btn-primary">Shop Category 4</a>
+                    <p class="card-text">Description of Category 5</p>
+                    <a href="#" class="btn btn-primary">Shop Category 5</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 
 <!-- Featured Products Section -->
