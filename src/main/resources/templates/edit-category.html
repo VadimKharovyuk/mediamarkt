@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Category</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/categories">Категории</a>
+        <a href="/products">Товары</a>
+        <a href="/cart">Корзина</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Редактировать категорию</h1>
+    <form action="#" th:action="@{/categories/update/{id}(id=${category.id})}" method="post">
+        <label for="name">Название:</label>
+        <input type="text" id="name" name="name" th:value="${category.name}" required />
+        <label for="imageUrl">URL изображения:</label>
+        <input type="text" id="imageUrl" name="imageUrl" th:value="${category.imageUrl}" />
+        <button type="submit">Сохранить</button>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2024 My Online Shop</p>
+</footer>
+</body>
+</html>

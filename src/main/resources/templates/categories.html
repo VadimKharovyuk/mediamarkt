@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/categories">Категории</a>
+        <a href="/products">Товары</a>
+        <a href="/cart">Корзина</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Категории</h1>
+    <a href="/categories/new">Создать новую категорию</a>
+    <ul>
+        <li th:each="category : ${categories}">
+            <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
+        </li>
+    </ul>
+</main>
+
+<footer>
+    <p>&copy; 2024 My Online Shop</p>
+</footer>
+</body>
+</html>

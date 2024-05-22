@@ -41,6 +41,10 @@
         .search button:hover {
             background-color: #0056b3;
         }
+        .card-img-top{
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +87,7 @@
 <main>
     <section class="search">
         <h1>Поиск товаров</h1>
-        <form action="#" th:action="@{/search}" method="get">
+        <form action="#" th:action="@{/products/search}" method="get">
             <input type="text" name="name" placeholder="Введите название товара" required />
             <button type="submit">Поиск</button>
         </form>
@@ -99,7 +103,7 @@
         <!-- Example Category Card -->
         <div class="col-md-4">
             <div class="card">
-                <img src="category1.jpg" class="card-img-top" alt="Category 1">
+                <img src="/catogoryPic/0c1eebfd-646d-4ea9-b6c5-ddd23438bc51.png.webp"  class="card-img-top" alt="Category 1">
                 <div class="card-body">
                     <h5 class="card-title">Category 1</h5>
                     <p class="card-text">Description of Category 1</p>
