@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/" th:href="@{/}">Главная</a>
+        <a href="/products" th:href="@{/products}">Товары</a>
+        <a href="/cart" th:href="@{/cart}">Корзина</a>
+    </nav>
+</header>
+
+<main>
+    <section id="search-results">
+        <h2>Результаты поиска</h2>
+        <ul>
+            <li th:each="product : ${products}">
+                <div>
+                    <img th:src="${product.imageUrl}" alt="Фото товара" />
+                    <h3 th:text="${product.name}">Название товара</h3>
+                    <p th:text="${product.description}">Описание товара</p>
+                    <p th:text="${product.price}">Цена</p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Ваш Интернет-Магазин</p>
+</footer>
+</body>
+</html>

@@ -6,6 +6,42 @@
     <title>My Online Store</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ваши стили для секции поиска */
+        .search {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .search form {
+            display: inline-block; /* Изменено на inline-block */
+        }
+
+        .search input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        .search button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <!-- Navigation -->
@@ -43,6 +79,18 @@
         <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
     </div>
 </header>
+
+<main>
+    <section class="search">
+        <h1>Поиск товаров</h1>
+        <form action="#" th:action="@{/search}" method="get">
+            <input type="text" name="name" placeholder="Введите название товара" required />
+            <button type="submit">Поиск</button>
+        </form>
+    </section>
+
+    <!-- Здесь будет результат поиска -->
+</main>
 
 <!-- Categories Section -->
 <section class="container mt-5">
