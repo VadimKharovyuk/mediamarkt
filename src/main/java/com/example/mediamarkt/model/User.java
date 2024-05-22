@@ -1,5 +1,4 @@
 package com.example.mediamarkt.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,21 +7,28 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-
-public class Category {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String imageUrl; // Поле для хранения URL изображения категории
+    private String username;
+    private String password;
+    private String email;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+    @OneToMany(mappedBy = "user")
+    private List<ShoppingCart> shoppingCarts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+
 
 }
+
