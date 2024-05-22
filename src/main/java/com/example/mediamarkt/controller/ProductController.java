@@ -1,6 +1,7 @@
 package com.example.mediamarkt.controller;
 
 import com.example.mediamarkt.model.Product;
+import com.example.mediamarkt.service.CategoryService;
 import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
+
+
     @GetMapping("/search")
     public String searchProducts(@RequestParam("name") String name, Model model) {
         List<Product> products = productService.searchProductsByName(name);
@@ -39,7 +43,12 @@ public class ProductController {
             return "product-not-found"; // Имя шаблона для отображения ошибки
         }
     }
-
+    @GetMapping("/add")
+    public String showAddProductForm(Model model) {
+        model.addAttribute("product", new Product());
+        model.addAttribute("categories", categoryService.getAllCategories()); // Предполагается, что у вас есть categoryService для получения всех категорий
+        return "add-product";
+    }
 
 
     @PostMapping

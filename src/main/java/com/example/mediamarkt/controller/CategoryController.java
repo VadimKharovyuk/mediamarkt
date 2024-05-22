@@ -1,6 +1,9 @@
 package com.example.mediamarkt.controller;
+
 import com.example.mediamarkt.model.Category;
+import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
+import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import java.util.Optional;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final ProductService productService;
 
     @GetMapping
     public String getAllCategories(Model model) {
@@ -27,8 +31,10 @@ public class CategoryController {
     public String getCategoryById(@PathVariable Long id, Model model) {
         Optional<Category> category = categoryService.getCategoryById(id);
         if (category.isPresent()) {
+            List<Product> products = productService.getProductsByCategoryId(id);
             model.addAttribute("category", category.get());
-            return "category"; // Имя шаблона для отображения категории по ID
+            model.addAttribute("products", products);
+            return "category"; // Имя шаблона для отображения категории и товаров по ID
         } else {
             return "category-not-found"; // Имя шаблона для отображения ошибки
         }
@@ -70,4 +76,3 @@ public class CategoryController {
         return "redirect:/categories";
     }
 }
-

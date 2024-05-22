@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Category Details</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Категория</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<header>
-    <nav>
-        <a href="/">Главная</a>
-        <a href="/categories">Категории</a>
-        <a href="/products">Товары</a>
-        <a href="/cart">Корзина</a>
-    </nav>
-</header>
-
-<main>
-    <h1 th:text="${category.name}">Название категории</h1>
-    <img th:src="${category.imageUrl}" alt="Фото категории"/>
-    <h2>Товары в этой категории</h2>
-    <ul>
-        <li th:each="product : ${category.products}">
-            <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}">Название товара</a>
-        </li>
-    </ul>
-    <a th:href="@{/categories/edit/{id}(id=${category.id})}">Редактировать категорию</a>
-    <a th:href="@{/categories/delete/{id}(id=${category.id})}">Удалить категорию</a>
-</main>
-
-<footer>
-    <p>&copy; 2024 My Online Shop</p>
-</footer>
+<div class="container mt-5">
+    <h2 class="text-center mb-4" th:text="${category.name}">Название категории</h2>
+    <div class="row">
+<!--        <div class="col-md-12">-->
+<!--            <p th:text="${category.description}">Описание категории</p>-->
+<!--        </div>-->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Продукты</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div th:each="product : ${products}" class="col-md-3">
+            <div class="card mb-4">
+                <img th:src="${product.imageUrl}" class="card-img-top" th:alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
+                    <p class="card-text" th:text="${product.description}">Описание продукта</p>
+                    <p class="card-text"><strong th:text="${product.price}">Цена</strong></p>
+                    <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

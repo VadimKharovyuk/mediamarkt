@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый продукт</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Добавить новый продукт</h2>
+    <form th:action="@{/products}" method="post" th:object="${product}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Название продукта</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Введите название продукта" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание продукта</label>
+            <textarea class="form-control" id="description" th:field="*{description}" rows="3" placeholder="Введите описание продукта" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Цена</label>
+            <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Введите цену продукта" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Категория</label>
+            <select class="form-control" id="category" th:field="*{category.id}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Категория</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="stockQuantity">Количество на складе</label>
+            <input type="number" class="form-control" id="stockQuantity" th:field="*{stockQuantity}" placeholder="Введите количество на складе" required>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">URL изображения</label>
+            <input type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}" placeholder="Введите URL изображения" >
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить продукт</button>
+    </form>
+</div>
+</body>
+</html>

@@ -20,6 +20,7 @@
     <a href="/categories/new">Создать новую категорию</a>
     <ul>
         <li th:each="category : ${categories}">
+            <img th:src="${category.imageUrl}" alt="Фото категории"/>
             <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
         </li>
     </ul>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все продукты</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-card {
+            margin-bottom: 20px;
+        }
+        .product-card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Все продукты</h2>
+    <div class="row">
+        <div class="col-md-4" th:each="product : ${products}">
+            <div class="card product-card">
+                <img th:src="${product.imageUrl}" class="card-img-top" th:alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
+                    <p class="card-text" th:text="${product.description}">Описание продукта</p>
+                    <p class="card-text"><strong th:text="${product.price}">Цена продукта</strong></p>
+                    <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
