@@ -60,6 +60,131 @@
         .card-body {
             text-align: center;
         }
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .category-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .category-item img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .category-item a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+
+        .category-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Стили для продуктов */
+        .product-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            width: 22%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .product-item .card-body {
+            padding: 15px;
+        }
+
+        .product-item .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-item .card-text {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .product-item .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .product-item .btn:hover {
+            background-color: #0056b3;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /*footer {*/
+        /*    text-align: center;*/
+        /*    padding: 15px;*/
+        /*    background-color: #f0f0f0;*/
+        /*    position: absolute;*/
+        /*    width: 100%;*/
+        /*    bottom: 0;*/
+        /*}*/
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 50px; /* Высота подвала */
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
 
 
 
@@ -75,13 +200,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="/products">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
+                <a class="nav-link" href="/categories">Categories</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Cart</a>
@@ -176,24 +301,58 @@
 
 
 <!-- Featured Products Section -->
-<section class="container mt-5">
-    <h2 class="text-center mb-4">Featured Products</h2>
-    <div class="row">
-        <!-- Example Product Card -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="product1.jpg" class="card-img-top" alt="Product 1">
-                <div class="card-body">
-                    <h5 class="card-title">Product 1</h5>
-                    <p class="card-text">Description of Product 1</p>
-                    <p class="card-text">$99.99</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+<main class="container">
+    <section class="mt-5">
+        <h2 class="text-center mb-4">Categories</h2>
+        <ul class="category-list">
+            <li class="category-item" th:each="category : ${categories}">
+                <img th:src="${category.imageUrl}" alt="Фото категории"/>
+                <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="container mt-5">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row product-list">
+            <!-- Example Product Card -->
+            <div class="product-item col-md-3">
+                <div class="card">
+                    <img src="/catogoryPic/iPhone13.webp" class="card-img-top" alt="Product 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">Description of Product 1</p>
+<!--                        <p class="card-text">$99.99</p>-->
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item col-md-3">
+                <div class="card">
+                    <img src="/catogoryPic/MacBook.webp" class="card-img-top" alt="Product 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Description of Product 2</p>
+<!--                        <p class="card-text">$149.99</p>-->
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item col-md-3">
+                <div class="card">
+                    <img src="/catogoryPic/iphone15.png" class="card-img-top" alt="Product 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 3</h5>
+                        <p class="card-text">Description of Product 3</p>
+<!--                        <p class="card-text">$199.99</p>-->
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Repeat for other products -->
-    </div>
-</section>
+    </section>
+</main>
+
 
 <!-- Footer -->
 <footer class="bg-light text-center text-lg-start mt-5">

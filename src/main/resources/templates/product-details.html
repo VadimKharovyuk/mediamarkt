@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Подробная информация о продукте</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ваши стили CSS здесь */
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Подробная информация о продукте</h2>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <img th:src="${product.imageUrl}" class="card-img-top" th:alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
+                    <p class="card-text" th:text="${product.description}">Описание продукта</p>
+                    <p class="card-text"><strong>$<span th:text="${product.price}">Цена продукта</span></strong></p>
+
+
+                    <!-- Здесь можно добавить другие поля продукта, если они есть -->
+                    <!-- Пример: -->
+                    <!-- <p class="card-text">Масса: <span th:text="${product.weight}">Вес продукта</span></p> -->
+                    <!-- <p class="card-text">Категория: <span th:text="${product.category}">Категория продукта</span></p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -26,7 +26,7 @@
                     <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
                     <p class="card-text" th:text="${product.description}">Описание продукта</p>
                     <p class="card-text"><strong th:text="${product.price}">Цена</strong></p>
-                    <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                    <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
                 </div>
             </div>
         </div>

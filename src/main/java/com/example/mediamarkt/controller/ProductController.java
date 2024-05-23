@@ -62,4 +62,15 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/products/{id}")
+    public String getProductDetails(@PathVariable Long id, Model model) {
+        Optional<Product> product = productService.getProductById(id);
+        if (product.isPresent()) {
+            model.addAttribute("product", product.get());
+            return "product-details"; // Имя шаблона для отображения подробной информации о продукте
+        } else {
+            return "product-not-found"; // Имя шаблона для отображения ошибки
+        }
+    }
 }
