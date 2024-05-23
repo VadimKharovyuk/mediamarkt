@@ -46,10 +46,15 @@
             height: 75px;
         }
         .category-card {
+            height: 100%;
             transition: transform 0.3s, box-shadow 0.3s;
             margin-top: 20px;
             margin-left: 15px;
             margin-right: 15px;
+        }
+        .category-card img {
+            height: 80px; /* фиксированная высота изображения */
+            object-fit: cover;
         }
 
         .category-card:hover {
@@ -195,32 +200,7 @@
     </style>
 </head>
 <body>
-<!-- Navigation -->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--    <a class="navbar-brand" href="/">My Online Store</a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--        <ul class="navbar-nav ml-auto">-->
-<!--            <li class="nav-item active">-->
-<!--                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="/products">Products</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="/categories">Categories</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Cart</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Contact</a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Мой Магазин</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
