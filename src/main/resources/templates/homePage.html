@@ -291,8 +291,8 @@
                 <img src="/catogoryPic/laptop.webp" class="card-img-top" alt="Category 1">
                 <div class="card-body">
                     <h5 class="card-title">Ноутбуки</h5>
-                    <p class="card-text">Description of Category 1</p>
-                    <a href="/categories/2" class="btn btn-primary">Shop Category 1</a>
+                    <p class="card-text">Широкий выбор ноутбуков от ведущих брендов. Подходящие модели для работы, учебы и игр. Высокая производительность и новейшие технологии.</p>
+                    <a href="/categories/2" class="btn btn-primary">Смотреть</a>
                 </div>
             </div>
         </div>
@@ -302,8 +302,8 @@
                 <img src="/catogoryPic/coffeMashine.webp" class="card-img-top" alt="Category 2">
                 <div class="card-body">
                     <h5 class="card-title">Бытовая техника</h5>
-                    <p class="card-text">Description of Category 2</p>
-                    <a href="#" class="btn btn-primary">Shop Category 2</a>
+                    <p class="card-text">Все необходимое для вашего дома: пылесосы, стиральные машины, холодильники и микроволновые печи. Качество, энергоэффективность и стильный дизайн.</p>
+                    <a href="#" class="btn btn-primary">Смотреть</a>
                 </div>
             </div>
         </div>
@@ -312,28 +312,18 @@
                 <img src="/catogoryPic/phone.png" class="card-img-top" alt="Category 3">
                 <div class="card-body">
                     <h5 class="card-title">Мобильные телефоны</h5>
-                    <p class="card-text">Description of Category 3</p>
-                    <a href="/categories/1" class="btn btn-primary">Shop Category 3</a>
+                    <p class="card-text">Смартфоны от ведущих производителей с отличной производительностью, качественными камерами и длительным временем работы от аккумулятора.</p>
+                    <a href="/categories/1" class="btn btn-primary">Смотреть </a>
                 </div>
             </div>
         </div>
-<!--        <div class="col-md-3 mb-4">-->
-<!--            <div class="card category-card">-->
-<!--                <img src="/catogoryPic/telek.webp" class="card-img-top" alt="Category 4">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Телевизоры</h5>-->
-<!--                    <p class="card-text">Description of Category 4</p>-->
-<!--                    <a href="#" class="btn btn-primary">Shop Category 4</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="col-md-3 mb-4">
             <div class="card category-card">
                 <img src="/catogoryPic/аксессуары.png.webp" class="card-img-top" alt="Category 5">
                 <div class="card-body">
                     <h5 class="card-title">Аксессуары</h5>
-                    <p class="card-text">Description of Category 5</p>
-                    <a href="#" class="btn btn-primary">Shop Category 5</a>
+                    <p class="card-text">Стильные и функциональные аксессуары: чехлы, зарядные устройства, наушники и колонки. Защита и улучшение функциональности ваших устройств.</p>
+                    <a href="/categories/6" class="btn btn-primary">Смотреть </a>
                 </div>
             </div>
         </div>
@@ -343,16 +333,16 @@
 
 
 <!-- Featured Products Section -->
-<main class="container">
-    <section class="mt-5">
-        <h2 class="text-center mb-4">Categories</h2>
-        <ul class="category-list">
-            <li class="category-item" th:each="category : ${categories}">
-                <img th:src="${category.imageUrl}" alt="Фото категории"/>
-                <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
-            </li>
-        </ul>
-    </section>
+<!--<main class="container">-->
+<!--    <section class="mt-5">-->
+<!--        <h2 class="text-center mb-4">Categories</h2>-->
+<!--        <ul class="category-list">-->
+<!--            <li class="category-item" th:each="category : ${categories}">-->
+<!--                <img th:src="${category.imageUrl}" alt="Фото категории"/>-->
+<!--                <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </section>-->
 
     <section class="container mt-5">
         <h2 class="text-center mb-4">Featured Products</h2>
@@ -364,7 +354,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Product 1</h5>
                         <p class="card-text">Description of Product 1</p>
-<!--                        <p class="card-text">$99.99</p>-->
+                        <p class="card-text">$1199.99</p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
                     </div>
                 </div>
@@ -375,7 +365,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Product 2</h5>
                         <p class="card-text">Description of Product 2</p>
-<!--                        <p class="card-text">$149.99</p>-->
+                        <p class="card-text">$1499.99</p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
                     </div>
                 </div>
@@ -386,7 +376,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Product 3</h5>
                         <p class="card-text">Description of Product 3</p>
-<!--                        <p class="card-text">$199.99</p>-->
+                        <p class="card-text">$1290.99</p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
                     </div>
                 </div>
@@ -403,7 +393,8 @@
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h5 class="text-uppercase">My Online Store</h5>
                 <p>
-                    Your one-stop shop for the best products at unbeatable prices. Shop with confidence and enjoy fast, reliable delivery.
+                    Ваш универсальный магазин предлагает лучшие товары по невероятно выгодным ценам. Мы стремимся предоставить вам разнообразие продуктов высокого качества, от электроники до модных аксессуаров, от бытовой техники до уникальных подарков. Делайте покупки с уверенностью, зная, что мы обеспечиваем быструю и надежную доставку прямо до вашей двери. Наслаждайтесь удобным и приятным шопингом, экономьте время и деньги, выбирая нас!<br>
+                    Ваша удовлетворенность — наш приоритет.
                 </p>
             </div>
 
@@ -411,13 +402,13 @@
                 <h5 class="text-uppercase">Quick Links</h5>
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a href="#" class="text-dark">Home</a>
+                        <a href="/" class="text-dark">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="text-dark">Products</a>
+                        <a href="/products" class="text-dark">Products</a>
                     </li>
                     <li>
-                        <a href="#" class="text-dark">Categories</a>
+                        <a href="/categories" class="text-dark">Categories</a>
                     </li>
                     <li>
                         <a href="#" class="text-dark">Contact</a>
