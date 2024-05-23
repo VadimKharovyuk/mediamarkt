@@ -6,40 +6,38 @@
     <link rel="stylesheet" href="/css/styles.css">
     <style>
         /* Стили для категории */
-        .category-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .category-item {
+        .category-card {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            text-align: center;
         }
 
-        .category-item:hover {
+        .category-card:hover {
             background-color: #f9f9f9;
+            transform: translateY(-5px);
         }
 
-        .category-item img {
-            width: 75px;
-            height: 75px;
+        .category-card img {
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
 
-        .category-item a {
+        .category-card a {
             text-decoration: none;
             color: #007bff;
-            font-size: 18px;
+            font-size: 20px;
         }
 
-        .category-item a:hover {
+        .category-card a:hover {
             text-decoration: underline;
         }
 
@@ -77,6 +75,12 @@
             width: 80%;
             margin: 0 auto;
         }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -92,12 +96,12 @@
 <main class="container">
     <h1>Категории</h1>
     <a href="/categories/new">Создать новую категорию</a>
-    <ul class="category-list">
-        <li class="category-item" th:each="category : ${categories}">
+    <div class="category-grid">
+        <div class="category-card" th:each="category : ${categories}">
             <img th:src="${category.imageUrl}" alt="Фото категории"/>
             <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
-        </li>
-    </ul>
+        </div>
+    </div>
 </main>
 
 <footer>
