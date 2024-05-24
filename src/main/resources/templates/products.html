@@ -27,10 +27,16 @@
                     <p class="card-text" th:text="${product.description}">Описание продукта</p>
                     <p class="card-text"><strong th:text="${product.price}">Цена продукта</strong></p>
                     <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                    <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">
+                        <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 </body>
 </html>
