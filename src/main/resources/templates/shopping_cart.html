@@ -9,6 +9,22 @@
         .product-image {
             width: 250px;
             height: auto;
+            display: block;
+            margin: 0 auto; /* Центрирование изображения */
+        }
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрирование содержимого карточки */
+            text-align: center; /* Центрирование текста */
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; /* Равномерное распределение карточек */
+        }
+        .product-item {
+            margin-bottom: 20px; /* Отступ между строками карточек */
         }
     </style>
 </head>
@@ -40,9 +56,9 @@
     <h2 class="text-center mb-4">Ваша корзина</h2>
     <div class="row">
         <div class="col-md-12">
-            <div th:if="${shoppingCart != null && !shoppingCart.products.isEmpty()}">
-                <div th:each="product : ${shoppingCart.products}">
-                    <div class="card mb-3">
+            <div th:if="${shoppingCart != null && !shoppingCart.products.isEmpty()}" class="product-list">
+                <div th:each="product : ${shoppingCart.products}" class="product-item col-md-3">
+                    <div class="card product-card mb-3">
                         <div class="card-body">
                             <img th:src="${product.imageUrl}" class="card-img-top product-image" th:alt="${product.name}">
                             <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
@@ -51,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="text-right">Общая стоимость: <span th:text="${totalPrice}">0.00</span> грн.</h3>
+                <h3 class="text-right col-12">Общая стоимость: <span th:text="${totalPrice}">0.00</span> грн.</h3>
             </div>
             <div th:if="${shoppingCart == null || shoppingCart.products.isEmpty()}">
                 <p>Ваша корзина пуста.</p>
