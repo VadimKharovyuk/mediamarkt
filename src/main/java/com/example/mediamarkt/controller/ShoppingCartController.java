@@ -37,29 +37,6 @@ public class ShoppingCartController {
     }
 
 
-    //    @PostMapping("/add/{productId}")
-//    public String addProductToCart(@PathVariable("productId") Long productId, HttpSession session) {
-//        ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
-//
-//        if (shoppingCart == null) {
-//            shoppingCart = new ShoppingCart();
-//            session.setAttribute("shoppingCart", shoppingCart);
-//        }
-//
-//        Product product = productService.getProductById(productId)
-//                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
-//
-//        shoppingCart.getProducts().add(product);
-//
-//        // Сохраняем корзину в сессии
-//        session.setAttribute("shoppingCart", shoppingCart);
-//
-//        // Логирование для отладки
-//        System.out.println("Product added: " + product.getName());
-//        System.out.println("Current cart size: " + shoppingCart.getProducts().size());
-//
-//        return "redirect:/cart";
-//    }
 @PostMapping("/add/{productId}")
 public String addProductToCart(@PathVariable("productId") Long productId, HttpSession session) {
     ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
