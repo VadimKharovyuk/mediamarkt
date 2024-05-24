@@ -25,14 +25,9 @@ public class ShoppingCartController {
     @GetMapping
     public String viewShoppingCart(Model model, HttpSession session) {
         ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
-
-        // Проверка, что корзина не пуста
-        System.out.println("Viewing cart. Cart size: " + (shoppingCart != null ? shoppingCart.getProducts().size() : 0));
-
         // Передаем корзину в модель для отображения на странице
         model.addAttribute("shoppingCart", shoppingCart);
-
-        // Возвращаем имя представления
+        model.addAttribute("totalPrice", shoppingCartService.getTotalPrice(shoppingCart));
         return "shopping_cart";
     }
 
@@ -51,27 +46,14 @@ public String addProductToCart(@PathVariable("productId") Long productId, HttpSe
         shoppingCart.setProducts(new ArrayList<>());
     }
 
-    System.out.println("Before adding product. Cart size: " + shoppingCart.getProducts().size());
-
     Product product = productService.getProductById(productId)
             .orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
     shoppingCart.getProducts().add(product);
 
-    System.out.println("After adding product. Cart size: " + shoppingCart.getProducts().size());
-
     session.setAttribute("shoppingCart", shoppingCart);
-
-    System.out.println("After saving to session. Cart size: " + ((ShoppingCart) session.getAttribute("shoppingCart")).getProducts().size());
-
-    return "redirect:/cart";
+    return "redirect:/products";
 }
-
-
-
-
-
-
 
     @PostMapping("/remove/{id}")
     public String removeShoppingCart(@PathVariable("id") Long id) {

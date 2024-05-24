@@ -24,13 +24,13 @@ public class ProductController {
     public String searchProducts(@RequestParam("name") String name, Model model) {
         List<Product> products = productService.searchProductsByName(name);
         model.addAttribute("products", products);
-        return "search-results"; // возвращаем имя страницы для отображения результатов
+        return "search-results";
     }
     @GetMapping
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
-        return "products"; // Имя шаблона для отображения всех продуктов
+        return "products";
     }
 
     @GetMapping("/{id}")
@@ -54,7 +54,7 @@ public class ProductController {
     @PostMapping
     public String saveProduct(@ModelAttribute Product product) {
         productService.saveProduct(product);
-        return "redirect:/products"; // Перенаправление на список продуктов после сохранения
+        return "redirect:/products";
     }
 
     @DeleteMapping("/{id}")
@@ -68,9 +68,9 @@ public class ProductController {
         Optional<Product> product = productService.getProductById(id);
         if (product.isPresent()) {
             model.addAttribute("product", product.get());
-            return "product-details"; // Имя шаблона для отображения подробной информации о продукте
+            return "product-details";
         } else {
-            return "product-not-found"; // Имя шаблона для отображения ошибки
+            return "product-not-found";
         }
     }
 }

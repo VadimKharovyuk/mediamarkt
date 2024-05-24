@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +47,13 @@ public class ShoppingCartService {
         }
         return shoppingCart;
     }
+    // Новый метод для расчета общей стоимости корзины
+    public BigDecimal getTotalPrice(ShoppingCart shoppingCart) {
+        return shoppingCart.getProducts().stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
 
 }
 

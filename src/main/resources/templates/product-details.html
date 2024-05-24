@@ -16,15 +16,19 @@
             <div class="card">
                 <img th:src="${product.imageUrl}" class="card-img-top" th:alt="${product.name}">
                 <div class="card-body">
+<!--                    <p class="card-text">Категория: <span th:text="${product.category}">Категория продукта</span></p>-->
                     <h5 class="card-title" th:text="${product.name}">Название продукта</h5>
                     <p class="card-text" th:text="${product.description}">Описание продукта</p>
                     <p class="card-text"><strong>$<span th:text="${product.price}">Цена продукта</span></strong></p>
+                    <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">
+                        <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                    </form>
 
 
                     <!-- Здесь можно добавить другие поля продукта, если они есть -->
                     <!-- Пример: -->
                     <!-- <p class="card-text">Масса: <span th:text="${product.weight}">Вес продукта</span></p> -->
-                    <!-- <p class="card-text">Категория: <span th:text="${product.category}">Категория продукта</span></p> -->
+
                 </div>
             </div>
         </div>
