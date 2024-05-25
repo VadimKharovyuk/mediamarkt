@@ -31,10 +31,10 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Создать скидку</h2>
     <form th:action="@{/discounts/save}" th:object="${discount}" method="post">
-        <div class="form-group">
-            <label for="code">Код скидки</label>
-            <input type="text" class="form-control" id="code" th:field="*{code}" required>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="code">Код скидки</label>-->
+<!--            <input type="text" class="form-control" id="code" th:field="*{code}" required>-->
+<!--        </div>-->
         <div class="form-group">
             <label for="amount">Размер скидки</label>
             <input type="number" class="form-control" id="amount" th:field="*{amount}" required>

@@ -20,6 +20,9 @@ public class DiscountService {
         LocalDate now = LocalDate.now();
         return discountRepository.findActiveDiscountForCategory(categoryId, now);
     }
+    public Optional<Discount> getActiveDiscountForProduct(Long productId) {
+        return discountRepository.findActiveDiscountForCategory(productId, LocalDate.now());
+    }
 
     public Discount saveDiscount(Discount discount) {
         return discountRepository.save(discount);
@@ -32,5 +35,12 @@ public class DiscountService {
     public void deleteDiscount(Long id) {
         discountRepository.deleteById(id);
     }
+
 }
+
+
+
+
+
+
 

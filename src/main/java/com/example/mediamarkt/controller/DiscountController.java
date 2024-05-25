@@ -1,8 +1,11 @@
 package com.example.mediamarkt.controller;
+
 import com.example.mediamarkt.model.Category;
 import com.example.mediamarkt.model.Discount;
+import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
 import com.example.mediamarkt.service.DiscountService;
+import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +20,8 @@ public class DiscountController {
 
     private final DiscountService discountService;
     private final CategoryService categoryService;
+    private final ProductService productService;
 
-
-    @GetMapping
-    public String viewAllDiscounts(Model model) {
-        List<Discount> discounts = discountService.getAllDiscounts();
-        model.addAttribute("discounts", discounts);
-        return "discount_list";
-    }
 
     @GetMapping("/new")
     public String createDiscountForm(Model model) {
@@ -38,12 +35,22 @@ public class DiscountController {
         discountService.saveDiscount(discount);
         return "redirect:/discounts";
     }
+
+    @GetMapping
+    public String viewAllDiscounts(Model model) {
+        List<Discount> discounts = discountService.getAllDiscounts();
+        model.addAttribute("discounts", discounts);
+        return "discount_list";
+    }
+
+
     @PostMapping("/delete/{id}")
     public String deleteDiscount(@PathVariable Long id) {
         discountService.deleteDiscount(id);
         return "redirect:/discounts";
     }
 
-    // другие методы, если необходимо
+
 }
+
 

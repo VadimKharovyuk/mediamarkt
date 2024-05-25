@@ -11,4 +11,8 @@ public interface DiscountRepository extends JpaRepository<Discount,Long> {
 
     @Query("SELECT d FROM Discount d WHERE d.category.id = :categoryId AND :now BETWEEN d.startDate AND d.endDate")
     Optional<Discount> findActiveDiscountForCategory(Long categoryId, LocalDate now);
+
+
+
 }
+
