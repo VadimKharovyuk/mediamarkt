@@ -1,60 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Список скидок</title>-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--</head>-->
-<!--<header>-->
-<!--    &lt;!&ndash; Навигационное меню &ndash;&gt;-->
-<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--        <a class="navbar-brand" href="/">Главная</a>-->
-<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--            <ul class="navbar-nav">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/categories">Категории</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/products">Товары</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/cart">Корзина</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </nav>-->
-<!--</header>-->
-<!--<body>-->
-<!--<div class="container mt-5">-->
-<!--    <h2 class="text-center mb-4">Список скидок</h2>-->
-<!--    <table class="table table-striped">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>Код</th>-->
-<!--            <th>Размер скидки</th>-->
-<!--            <th>Дата начала</th>-->
-<!--            <th>Дата окончания</th>-->
-<!--            <th>Категория</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="discount : ${discounts}">-->
-<!--            <td th:text="${discount.id}"></td>-->
-<!--            <td th:text="${discount.code}"></td>-->
-<!--            <td th:text="${discount.amount}"></td>-->
-<!--            <td th:text="${discount.startDate}"></td>-->
-<!--            <td th:text="${discount.endDate}"></td>-->
-<!--            <td th:text="${discount.category.name}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -68,18 +11,14 @@
             max-height: 200px;
             object-fit: cover;
         }
-
         .card {
             margin-bottom: 20px;
             height: 330px; /* Фиксированная высота карточки */
-            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Плавное изменение при hover */
+            transition: transform 0.3s ease-in-out; /* Плавное изменение при hover */
         }
-
         .card:hover {
             transform: scale(1.05); /* Увеличение размера при наведении */
-            background-color: #6eb9d3; /* Изменение цвета при наведении */
         }
-
     </style>
 </head>
 <header>
@@ -120,13 +59,13 @@
                         <strong>Дата окончания:</strong> <span th:text="${discount.endDate}">Дата окончания</span>
                     </p>
                     <a th:href="@{'/categories/' + ${discount.category.id}}" class="btn btn-primary">Перейти в категорию</a>
+                    <form th:action="@{'/discounts/delete/' + ${discount.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
-
-

@@ -38,6 +38,11 @@ public class DiscountController {
         discountService.saveDiscount(discount);
         return "redirect:/discounts";
     }
+    @PostMapping("/delete/{id}")
+    public String deleteDiscount(@PathVariable Long id) {
+        discountService.deleteDiscount(id);
+        return "redirect:/discounts";
+    }
 
     // другие методы, если необходимо
 }
