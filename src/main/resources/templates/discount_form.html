@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать скидку</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<header>
+    <!-- Навигационное меню -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Главная</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories">Категории</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Корзина</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Создать скидку</h2>
+    <form th:action="@{/discounts/save}" th:object="${discount}" method="post">
+        <div class="form-group">
+            <label for="code">Код скидки</label>
+            <input type="text" class="form-control" id="code" th:field="*{code}" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Размер скидки</label>
+            <input type="number" class="form-control" id="amount" th:field="*{amount}" required>
+        </div>
+        <div class="form-group">
+            <label for="startDate">Дата начала</label>
+            <input type="date" class="form-control" id="startDate" th:field="*{startDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="endDate">Дата окончания</label>
+            <input type="date" class="form-control" id="endDate" th:field="*{endDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Категория</label>
+            <select class="form-control" id="category" th:field="*{category.id}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

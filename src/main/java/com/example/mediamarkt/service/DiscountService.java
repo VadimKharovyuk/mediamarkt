@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +16,13 @@ public class DiscountService {
 
     private final DiscountRepository discountRepository;
 
-    public Discount saveDiscount(Discount discount) {
-        return discountRepository.save(discount);
+    public Optional<Discount> getActiveDiscountForCategory(Long categoryId) {
+        LocalDate now = LocalDate.now();
+        return discountRepository.findActiveDiscountForCategory(categoryId, now);
     }
 
-    public Optional<Discount> getDiscountById(Long id) {
-        return discountRepository.findById(id);
+    public Discount saveDiscount(Discount discount) {
+        return discountRepository.save(discount);
     }
 
     public List<Discount> getAllDiscounts() {

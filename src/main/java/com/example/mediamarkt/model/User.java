@@ -31,20 +31,5 @@ public class User {
     private List<Order> orders;
 
 
-
-    public ShoppingCart getShoppingCart(HttpServletRequest request) {
-        // Получаем текущую сессию
-        HttpSession session = request.getSession(false);
-
-        // Проверяем, существует ли сессия и атрибут с корзиной пользователя
-        if (session != null && session.getAttribute("shoppingCart") != null) {
-            // Преобразуем атрибут сессии в объект ShoppingCart
-            return (ShoppingCart) session.getAttribute("shoppingCart");
-        }
-
-        // Если сессия не существует или корзина пользователя не найдена в сессии, возвращаем null
-        return null;
-    }
-
 }
 

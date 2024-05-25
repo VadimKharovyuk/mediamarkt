@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,39 +22,33 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
-
-    @GetMapping
+    @GetMapping()
     public String viewShoppingCart(Model model, HttpSession session) {
         ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
-        // Передаем корзину в модель для отображения на странице
+        BigDecimal totalPrice = shoppingCartService.getTotalPrice(shoppingCart);
+
         model.addAttribute("shoppingCart", shoppingCart);
-        model.addAttribute("totalPrice", shoppingCartService.getTotalPrice(shoppingCart));
+        model.addAttribute("totalPrice", totalPrice);
+
         return "shopping_cart";
     }
 
+    @PostMapping("/add/{productId}")
+    public String addShoppingCart(@PathVariable("productId") Long productId, HttpSession session) {
+        ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
 
-@PostMapping("/add/{productId}")
-public String addProductToCart(@PathVariable("productId") Long productId, HttpSession session) {
-    ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+        }
 
-    if (shoppingCart == null) {
-        shoppingCart = new ShoppingCart();
+        Product product = productService.getProductById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+
+        shoppingCart.getProducts().add(product);
         session.setAttribute("shoppingCart", shoppingCart);
+
+        return "redirect:/cart";
     }
-
-    // Убедитесь, что список продуктов инициализирован
-    if (shoppingCart.getProducts() == null) {
-        shoppingCart.setProducts(new ArrayList<>());
-    }
-
-    Product product = productService.getProductById(productId)
-            .orElseThrow(() -> new IllegalArgumentException("Product not found"));
-
-    shoppingCart.getProducts().add(product);
-
-    session.setAttribute("shoppingCart", shoppingCart);
-    return "redirect:/products";
-}
 
     @PostMapping("/remove/{id}")
     public String removeShoppingCart(@PathVariable("id") Long id) {

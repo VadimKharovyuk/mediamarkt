@@ -1,10 +1,8 @@
 package com.example.mediamarkt.service;
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.model.ShoppingCart;
-import com.example.mediamarkt.model.User;
 import com.example.mediamarkt.repository.ShoppingCartRepository;
 import com.example.mediamarkt.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +19,7 @@ public class ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserRepository userRepository;
     private final ProductService productService;
+    private final DiscountService discountService;
 
     public ShoppingCart saveShoppingCart(ShoppingCart shoppingCart) {
         return shoppingCartRepository.save(shoppingCart);
@@ -48,10 +48,30 @@ public class ShoppingCartService {
         return shoppingCart;
     }
     // Новый метод для расчета общей стоимости корзины
+//    public BigDecimal getTotalPrice(ShoppingCart shoppingCart) {
+//        return shoppingCart.getProducts().stream()
+//                .map(Product::getPrice)
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+//    }
     public BigDecimal getTotalPrice(ShoppingCart shoppingCart) {
-        return shoppingCart.getProducts().stream()
-                .map(Product::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        List<Product> products = shoppingCart.getProducts();
+
+        for (Product product : products) {
+            BigDecimal price = getPriceWithDiscount(product);
+            totalPrice = totalPrice.add(price);
+        }
+
+        return totalPrice;
+    }
+
+    private BigDecimal getPriceWithDiscount(Product product) {
+        BigDecimal price = product.getPrice();
+        Long categoryId = product.getCategory().getId();
+
+        return discountService.getActiveDiscountForCategory(categoryId)
+                .map(discount -> price.subtract(discount.getAmount()))
+                .orElse(price);
     }
 
 
