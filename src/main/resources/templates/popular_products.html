@@ -1,0 +1,28 @@
+<!-- popular_products.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Popular Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Most Popular Products</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Addition Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="productAddition : ${popularProducts}">
+            <td th:text="${productAddition.product.name}"></td>
+            <td th:text="${productAddition.count}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

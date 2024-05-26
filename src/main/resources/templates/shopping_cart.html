@@ -69,11 +69,13 @@
                 </div>
                 <h3 class="text-right col-12">Общая стоимость: <span th:text="${totalPrice}">0.00</span> грн.</h3>
             </div>
+            <a class="btn btn-primary" href="/orders/new">Create New Order</a>
             <div th:if="${shoppingCart == null || shoppingCart.products.isEmpty()}">
                 <p>Ваша корзина пуста.</p>
             </div>
         </div>
     </div>
+
 </main>
 
 <footer class="text-center mt-4">

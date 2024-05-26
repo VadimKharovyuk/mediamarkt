@@ -3,6 +3,7 @@ package com.example.mediamarkt.controller;
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.model.ShoppingCart;
 import com.example.mediamarkt.model.User;
+import com.example.mediamarkt.service.ProductAdditionService;
 import com.example.mediamarkt.service.ProductService;
 import com.example.mediamarkt.service.ShoppingCartService;
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
+    private final ProductAdditionService productAdditionService;
     @GetMapping()
     public String viewShoppingCart(Model model, HttpSession session) {
         ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
@@ -46,6 +48,8 @@ public class ShoppingCartController {
 
         shoppingCart.getProducts().add(product);
         session.setAttribute("shoppingCart", shoppingCart);
+
+        productAdditionService.incrementProductCount(product);
 
         return "redirect:/cart";
     }
