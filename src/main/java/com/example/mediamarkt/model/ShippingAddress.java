@@ -18,10 +18,12 @@ public class ShippingAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String email;
+    private String phoneNumber;
     private String street;
     private String city;
     private String zipCode;
     private String country;
+
 }
 
