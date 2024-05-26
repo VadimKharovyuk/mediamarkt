@@ -27,8 +27,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<ShoppingCart> shoppingCarts;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
 
 
 }
