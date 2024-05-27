@@ -1,6 +1,7 @@
 package com.example.mediamarkt.controller;
 
 import com.example.mediamarkt.model.Category;
+import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.model.ProductAddition;
 import com.example.mediamarkt.service.CategoryService;
 import com.example.mediamarkt.service.PopularProductCacheService;
@@ -20,16 +21,16 @@ import java.util.List;
 @AllArgsConstructor
 public class PopularProductsController {
 
-    private PopularProductCacheService popularProductCacheService;
-    private ProductAdditionService productAdditionService;
-    private CategoryService categoryService;
+    private final PopularProductCacheService popularProductCacheService;
+    private final ProductAdditionService productAdditionService;
+    private final CategoryService categoryService;
 
     @GetMapping()
     public String viewPopularProducts(Model model) {
-        List<ProductAddition> popularProducts = popularProductCacheService.getPopularProducts();
+        List<Product> popularProducts = popularProductCacheService.getPopularProducts();
 
         if (popularProducts == null || popularProducts.isEmpty()) {
-            popularProducts = productAdditionService.getMostAddedProducts(10);
+            popularProducts = productAdditionService.getMostAddedProducts(12);
             popularProductCacheService.cachePopularProducts(popularProducts);
         }
 

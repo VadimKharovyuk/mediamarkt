@@ -1,5 +1,6 @@
 package com.example.mediamarkt.Config;
 
+import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.model.ProductAddition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +15,12 @@ import java.util.List;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, List<ProductAddition>> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, List<ProductAddition>> template = new RedisTemplate<>();
+    public RedisTemplate<String, List<Product>> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, List<Product>> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
+
 }

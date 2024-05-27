@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -13,22 +15,31 @@ public class ProductAdditionService {
 
     private final ProductAdditionRepository productAdditionRepository;
 
-    public void incrementProductCount(Product product) {
-        ProductAddition productAddition = productAdditionRepository.findByProductId(product.getId());
-        if (productAddition == null) {
-            productAddition = new ProductAddition();
-            productAddition.setProduct(product);
-            productAddition.setCount(1);
-        } else {
-            productAddition.setCount(productAddition.getCount() + 1);
-        }
-        productAdditionRepository.save(productAddition);
-    }
+    public List<Product> getMostAddedProducts(int limit) {
+        // Получаем все дополнения продуктов
+        List<ProductAddition> additions = productAdditionRepository.findAll();
 
-    public List<ProductAddition> getMostAddedProducts(int limit) {
-        return productAdditionRepository.findAll().stream()
-                .sorted((a, b) -> Integer.compare(b.getCount(), a.getCount()))
-                .limit(limit)
-                .toList();
+        // Группируем по продукту и подсчитываем количество добавлений для каждого продукта
+        return additions.stream()
+                .collect(Collectors.groupingBy(ProductAddition::getProduct, Collectors.counting()))
+                .entrySet().stream()
+                .sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue())) // Сортируем по количеству добавлений (по убыванию)
+                .limit(limit) // Ограничиваем количество возвращаемых продуктов
+                .map(entry -> entry.getKey()) // Преобразуем в список продуктов
+                .collect(Collectors.toList());
+    }
+    public void incrementProductCount(Product product) {
+        Optional<ProductAddition> existingAddition = productAdditionRepository.findByProduct(product);
+
+        if (existingAddition.isPresent()) {
+            ProductAddition productAddition = existingAddition.get();
+            productAddition.setCount(productAddition.getCount() + 1);
+            productAdditionRepository.save(productAddition);
+        } else {
+            ProductAddition newAddition = new ProductAddition();
+            newAddition.setProduct(product);
+            newAddition.setCount(1);
+            productAdditionRepository.save(newAddition);
+        }
     }
 }

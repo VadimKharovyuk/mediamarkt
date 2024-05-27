@@ -1,6 +1,7 @@
 package com.example.mediamarkt.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +31,6 @@ public class Product {
 
     private int stockQuantity;
 
-
-
     @ManyToMany(mappedBy = "products")
     private List<ShoppingCart> shoppingCarts;
-
-  
-
-
-
 }
