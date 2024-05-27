@@ -57,7 +57,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="productAddition : ${popularProducts}">
+        <tr th:each="productAddition : ${popular}">
             <td th:text="${productAddition.product.name}"></td>
             <td th:text="${productAddition.count}"></td>
         </tr>

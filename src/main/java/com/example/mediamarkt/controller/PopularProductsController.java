@@ -33,7 +33,7 @@ public class PopularProductsController {
             popularProductCacheService.cachePopularProducts(popularProducts);
         }
 
-        model.addAttribute("popularProducts", popularProducts);
+        model.addAttribute("popular", popularProducts);
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         return "popular_products";

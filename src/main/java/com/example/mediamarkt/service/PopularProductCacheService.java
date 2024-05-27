@@ -23,4 +23,3 @@ public class PopularProductCacheService {
         return redisTemplate.opsForValue().get(POPULAR_PRODUCTS_KEY);
     }
 }
-
