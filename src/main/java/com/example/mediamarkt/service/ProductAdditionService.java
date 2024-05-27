@@ -15,6 +15,10 @@ public class ProductAdditionService {
 
     private final ProductAdditionRepository productAdditionRepository;
 
+
+
+
+
     public List<Product> getMostAddedProducts(int limit) {
         // Получаем все дополнения продуктов
         List<ProductAddition> additions = productAdditionRepository.findAll();

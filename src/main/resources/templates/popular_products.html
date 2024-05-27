@@ -73,6 +73,11 @@
 <!--</html>-->
 
 
+
+
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -174,7 +179,7 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${product.name}">Product Name</h5>
                             <p class="card-text" th:text="${product.description}">Product Description</p>
-                            <p class="card-text">Цена: <span th:text="${product.price}">Product Price</span> руб.</p>
+                            <p class="card-text">Цена: <span th:text="${product.price}">Product Price</span> грн.</p>
                             <p class="card-text">В наличии: <span th:text="${product.stockQuantity}">Stock Quantity</span></p>
                         </div>
                     </div>
@@ -189,4 +194,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
