@@ -17,7 +17,7 @@ import java.util.List;
 public class MainPage {
 
     private final CategoryService categoryService;
-    private final ProductService productService;
+
 
     @GetMapping("/")
     public String home(Model model) {

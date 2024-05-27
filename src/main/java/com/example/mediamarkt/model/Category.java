@@ -1,5 +1,6 @@
 package com.example.mediamarkt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +21,10 @@ public class Category {
     private Long id;
 
     private String name;
-    private String imageUrl; // Поле для хранения URL изображения категории
+    private String imageUrl;
 
+
+    @JsonIgnore // Это поле будет исключено из процесса сериализации
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
