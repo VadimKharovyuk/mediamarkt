@@ -5,6 +5,7 @@ import com.example.mediamarkt.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,14 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+
+    @Cacheable(value = "searchProductsByName", key = "#name")
     public List<Product> searchProductsByName(String name) {
+        try (Jedis jedis = new Jedis("localhost", 6379)) {
+            for (String key : jedis.keys("searchProductsByName*")) {
+                jedis.expire(key, 60); // Установка TTL на 5 минут (300 секунд)
+            }
+        }
         return productRepository.findByNameContainingIgnoreCase(name);
     }
 
