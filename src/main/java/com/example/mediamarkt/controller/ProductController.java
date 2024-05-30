@@ -20,14 +20,7 @@ import java.util.Optional;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
-//    private final PopularProductCacheService popularProductCacheService;
 
-//    @GetMapping("/cache-all-products")
-//    public String cacheAllProducts() {
-//        List<Product> allProducts = productService.getAllProducts();
-//        popularProductCacheService.cachePopularProducts(allProducts);
-//        return "redirect:/";
-//    }
 
 
     @GetMapping("/search")
@@ -42,17 +35,17 @@ public class ProductController {
         model.addAttribute("products", products);
         return "products";
     }
-    @Cacheable(key = "#id", value = "getProductById")
-    @GetMapping("/{id}")
-    public String getProductById(@PathVariable Long id, Model model) {
-        Optional<Product> product = productService.getProductById(id);
-        if (product.isPresent()) {
-            model.addAttribute("product", product.get());
-            return "product"; // Имя шаблона для отображения продукта по ID
-        } else {
-            return "product-not-found"; // Имя шаблона для отображения ошибки
-        }
-    }
+//    @Cacheable(key = "#id", value = "getProductById")
+//    @GetMapping("/{id}")
+//    public String getProductById(@PathVariable Long id, Model model) {
+//        Optional<Product> product = productService.getProductById(id);
+//        if (product.isPresent()) {
+//            model.addAttribute("product", product.get());
+//            return "product"; // Имя шаблона для отображения продукта по ID
+//        } else {
+//            return "product-not-found"; // Имя шаблона для отображения ошибки
+//        }
+//    }
     @GetMapping("/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
