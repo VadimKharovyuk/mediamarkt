@@ -21,7 +21,7 @@ public class ProductService {
     public List<Product> searchProductsByName(String name) {
         try (Jedis jedis = new Jedis("localhost", 6379)) {
             for (String key : jedis.keys("searchProductsByName*")) {
-                jedis.expire(key, 60); // Установка TTL на 5 минут (300 секунд)
+                jedis.expire(key, 60);
             }
         }
         return productRepository.findByNameContainingIgnoreCase(name);
@@ -32,6 +32,11 @@ public class ProductService {
     }
     @Cacheable(key = "#id", value = "getProductById")
     public Optional<Product> getProductById(Long id) {
+        try (Jedis jedis = new Jedis("localhost", 6379)) {
+            for (String key : jedis.keys("getProductById*")) {
+                jedis.expire(key, 60);
+            }
+        }
         return productRepository.findById(id);
     }
 

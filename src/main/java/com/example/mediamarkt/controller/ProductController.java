@@ -35,17 +35,7 @@ public class ProductController {
         model.addAttribute("products", products);
         return "products";
     }
-//    @Cacheable(key = "#id", value = "getProductById")
-//    @GetMapping("/{id}")
-//    public String getProductById(@PathVariable Long id, Model model) {
-//        Optional<Product> product = productService.getProductById(id);
-//        if (product.isPresent()) {
-//            model.addAttribute("product", product.get());
-//            return "product"; // Имя шаблона для отображения продукта по ID
-//        } else {
-//            return "product-not-found"; // Имя шаблона для отображения ошибки
-//        }
-//    }
+
     @GetMapping("/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
