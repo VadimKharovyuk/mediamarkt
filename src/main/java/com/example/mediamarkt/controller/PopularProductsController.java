@@ -5,7 +5,6 @@ import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.model.ProductAddition;
 import com.example.mediamarkt.repository.ProductAdditionRepository;
 import com.example.mediamarkt.service.CategoryService;
-import com.example.mediamarkt.service.PopularProductCacheService;
 import com.example.mediamarkt.service.ProductAdditionService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,16 @@ import java.util.List;
 @AllArgsConstructor
 public class PopularProductsController {
 
-    private final PopularProductCacheService popularProductCacheService;
+
     private final ProductAdditionService productAdditionService;
     private final CategoryService categoryService;
 
 
     @GetMapping()
     public String viewPopularProducts(Model model) {
-        List<Product> popularProducts = popularProductCacheService.getPopularProducts();
+        List<Product> popularProducts = productAdditionService.getMostAddedProducts(10);
 
-        if (popularProducts == null || popularProducts.isEmpty()) {
-            popularProducts = productAdditionService.getMostAddedProducts(122);
-            popularProductCacheService.cachePopularProducts(popularProducts);
-        }
+
 
         model.addAttribute("popular", popularProducts);
         List<Category> categories = categoryService.findAll();

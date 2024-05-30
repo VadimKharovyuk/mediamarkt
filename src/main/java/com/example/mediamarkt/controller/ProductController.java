@@ -2,8 +2,10 @@ package com.example.mediamarkt.controller;
 
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
+
 import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,14 @@ import java.util.Optional;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+//    private final PopularProductCacheService popularProductCacheService;
+
+//    @GetMapping("/cache-all-products")
+//    public String cacheAllProducts() {
+//        List<Product> allProducts = productService.getAllProducts();
+//        popularProductCacheService.cachePopularProducts(allProducts);
+//        return "redirect:/";
+//    }
 
 
     @GetMapping("/search")
@@ -32,7 +42,7 @@ public class ProductController {
         model.addAttribute("products", products);
         return "products";
     }
-
+    @Cacheable(key = "#id", value = "getProductById")
     @GetMapping("/{id}")
     public String getProductById(@PathVariable Long id, Model model) {
         Optional<Product> product = productService.getProductById(id);
@@ -73,4 +83,8 @@ public class ProductController {
             return "product-not-found";
         }
     }
+
+
+
+
 }

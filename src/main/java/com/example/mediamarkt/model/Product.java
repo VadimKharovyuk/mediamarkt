@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Product {
+public class Product  implements Serializable {
+    private static final long serialVersionUID = 3817784222026364680L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

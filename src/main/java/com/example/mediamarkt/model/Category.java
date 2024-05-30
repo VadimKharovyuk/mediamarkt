@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Setter
@@ -15,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 
-public class Category {
+public class Category  implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,5 +29,6 @@ public class Category {
     @JsonIgnore // Это поле будет исключено из процесса сериализации
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
 
 }

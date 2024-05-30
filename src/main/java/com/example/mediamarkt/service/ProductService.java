@@ -3,6 +3,7 @@ package com.example.mediamarkt.service;
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
-
+    @Cacheable(key = "#id", value = "getProductById")
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
