@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Online Store</title>
     <link rel="stylesheet" href="styles.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Ваши стили для секции поиска */
@@ -197,6 +198,43 @@
         }
 
 
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 25px;
+            overflow: hidden; /* To ensure the border radius applies to the content inside the card */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            overflow: hidden; /* To ensure the image inside respects the border radius */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgb(76, 165, 203);
+        }
+
+
+
+        .card-img-top {
+            border-radius: 20px;
+            max-height: 80%;
+            object-fit: cover;
+        }
+
+
+
+
     </style>
 </head>
 <body>
@@ -318,46 +356,44 @@
     </div>
 </section>
 
-    <section class="container mt-5">
-        <h2 class="text-center mb-4">Featured Products</h2>
-        <div class="row product-list">
-            <!-- Example Product Card -->
-            <div class="product-item col-md-3">
-                <div class="card">
-                    <img src="/catogoryPic/iPhone13.webp" class="card-img-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text">Description of Product 1</p>
-                        <p class="card-text">$1199.99</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+
+    <div class="container mt-5">
+        <h2 style="text-align: center">  Популярные товары </h2>
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div th:each="group, iterStat : ${groupedProducts}" th:classappend="${iterStat.index == 0} ? 'active' : ''" class="carousel-item">
+                    <div class="row">
+                        <div th:each="product : ${group}" class="col-md-3">
+                            <div class="card h-100">
+                                <div class="card-img-top-wrapper">
+                                    <img th:src="@{${product.imageUrl}}" class="card-img-top">
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                                    <p class="card-text" th:text="'Price: $' + ${product.price}">Price</p>
+                                    <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-item col-md-3">
-                <div class="card">
-                    <img src="/catogoryPic/MacBook.webp" class="card-img-top" alt="Product 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text">Description of Product 2</p>
-                        <p class="card-text">$1499.99</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item col-md-3">
-                <div class="card">
-                    <img src="/catogoryPic/iphone15.png" class="card-img-top" alt="Product 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <p class="card-text">Description of Product 3</p>
-                        <p class="card-text">$1290.99</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-    </section>
-</main>
+    </div>
+
+
+
+
+
+
 
 
 <!-- Footer -->
