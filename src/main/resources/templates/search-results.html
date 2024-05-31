@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Результаты поиска</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Основные стили */
         body {
@@ -109,6 +110,12 @@
                     <h3 th:text="${product.name}">Название товара</h3>
                     <p th:text="${product.description}">Описание товара</p>
                     <p class="price" th:text="${product.price}">Цена</p>
+                    <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                    <div class="add-to-cart mt-3">
+                        <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">
+                            <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                        </form>
+                    </div>
                 </div>
             </li>
         </ul>
