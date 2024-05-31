@@ -26,7 +26,6 @@ public class MainPage {
         List<Category> categories = categoryService.findAll();
         List<Product> productList = productService.getAllProducts();
 
-        // Create a list of lists, where each sublist contains up to 4 products
         List<List<Product>> groupedProducts = new ArrayList<>();
         for (int i = 0; i < productList.size(); i += 4) {
             int end = Math.min(i + 4, productList.size());
