@@ -101,9 +101,19 @@
 </header>
 
 <main>
+
     <section id="search-results">
-        <h2>Результаты поиска</h2>
+
+        <h2 style="text-align: center"> Результаты поиска</h2>
         <ul>
+            <nav class="col-md-3">
+                <h2>Категории</h2>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="category : ${categories}">
+                        <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>
+                    </li>
+                </ul>
+            </nav>
             <li th:each="product : ${products}">
                 <div>
                     <img th:src="${product.imageUrl}" alt="Фото товара" />

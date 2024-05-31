@@ -1,5 +1,6 @@
 package com.example.mediamarkt.controller;
 
+import com.example.mediamarkt.model.Category;
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
 
@@ -26,7 +27,10 @@ public class ProductController {
     @GetMapping("/search")
     public String searchProducts(@RequestParam("name") String name, Model model) {
         List<Product> products = productService.searchProductsByName(name);
+        List<Category> categoryList = categoryService.findAll();
+
         model.addAttribute("products", products);
+        model.addAttribute("categories", categoryList);
         return "search-results";
     }
     @GetMapping
