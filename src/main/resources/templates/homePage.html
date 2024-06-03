@@ -9,12 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Ваши стили для секции поиска */
-        .search {
-            background-color: #f0f0f0;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+
 
         .search h1 {
             font-size: 24px;
@@ -66,24 +61,6 @@
         .card-body {
             text-align: center;
         }
-        .category-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .category-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .category-item:hover {
-            background-color: #f9f9f9;
-        }
 
         .category-item img {
             width: 75px;
@@ -103,24 +80,7 @@
             text-decoration: underline;
         }
 
-        /* Стили для продуктов */
-        .product-list {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
 
-        .product-item {
-            width: 22%;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: transform 0.3s;
-        }
-
-        .product-item:hover {
-            transform: translateY(-5px);
-        }
 
         .product-item img {
             width: 100%;
@@ -157,28 +117,6 @@
             background-color: #0056b3;
         }
 
-        nav {
-            margin-bottom: 20px;
-        }
-
-        nav a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /*footer {*/
-        /*    text-align: center;*/
-        /*    padding: 15px;*/
-        /*    background-color: #f0f0f0;*/
-        /*    position: absolute;*/
-        /*    width: 100%;*/
-        /*    bottom: 0;*/
-        /*}*/
 
         body {
             position: relative;
@@ -233,50 +171,63 @@
         }
 
 
-
+        .navbar-nav {
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 30px;
+        }
+        .search-input {
+            width: 400px;
+            margin-right: 10px;
+        }
 
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Мой Магазин</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Главная <span class="sr-only">(текущая)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">Товары</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Категории
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                        <a class="dropdown-item" th:each="category : ${categories}" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Категория</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Корзина</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/orders/new">Оформить Доставку</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/discounts">Скидки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/popular-products">popular-products</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Мой Магазин</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Главная <span class="sr-only">(текущая)</span></a>
+            </li>
+            <li class="nav-item">
+                <form class="search-form" action="#" th:action="@{/products/search}" method="get">
+                    <input type="text" name="name" class="form-control search-input" placeholder="Введите название товара" required />
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </form>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Категории
+                </a>
+                <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                    <a class="dropdown-item" th:each="category : ${categories}" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Категория</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">Корзина</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders/new">Оформить Доставку</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/discounts">Скидки</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- Hero Section -->
 <header class="jumbotron jumbotron-fluid">
@@ -296,13 +247,13 @@
 
 
 <main>
-    <section class="search">
-        <h1>Поиск товаров</h1>
-        <form action="#" th:action="@{/products/search}" method="get">
-            <input type="text" name="name" placeholder="Введите название товара" required />
-            <button type="submit">Поиск</button>
-        </form>
-    </section>
+<!--    <section class="search">-->
+<!--        <h1>Поиск товаров</h1>-->
+<!--        <form action="#" th:action="@{/products/search}" method="get">-->
+<!--            <input type="text" name="name" placeholder="Введите название товара" required />-->
+<!--            <button type="submit">Поиск</button>-->
+<!--        </form>-->
+<!--    </section>-->
 
     <!-- Здесь будет результат поиска -->
 </main>

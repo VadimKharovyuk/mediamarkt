@@ -3,10 +3,8 @@ package com.example.mediamarkt.controller;
 import com.example.mediamarkt.model.Category;
 import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
-
 import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 @RequestMapping("/products")
 @AllArgsConstructor
@@ -72,6 +69,6 @@ public class ProductController {
     }
 
 
-
-
 }
+
+
