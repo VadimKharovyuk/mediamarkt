@@ -115,6 +115,12 @@
         <div class="category-card" th:each="category : ${categories}">
             <img th:src="${category.imageUrl}" alt="Фото категории"/>
             <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Название категории</a>
+            <form th:action="@{/categories/delete/{id}(id=${category.id})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
+
+
         </div>
     </div>
 </main>

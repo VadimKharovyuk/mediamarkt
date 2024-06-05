@@ -5,7 +5,6 @@ import com.example.mediamarkt.model.Product;
 import com.example.mediamarkt.service.CategoryService;
 import com.example.mediamarkt.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,10 +50,10 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+    @PostMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+        return "redirect:/products";
     }
 
     @GetMapping("/products/{id}")

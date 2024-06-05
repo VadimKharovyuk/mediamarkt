@@ -70,7 +70,7 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return "redirect:/categories";

@@ -34,6 +34,6 @@ public class Product  implements Serializable {
 
     private int stockQuantity;
 
-    @ManyToMany(mappedBy = "products")
-    private List<ShoppingCart> shoppingCarts;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductAddition> productAdditions;
 }

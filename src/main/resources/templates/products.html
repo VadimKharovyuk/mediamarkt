@@ -53,7 +53,13 @@
                         <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">
                             <button type="submit" class="btn btn-success">Добавить в корзину</button>
                         </form>
+<!--                        <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post">-->
+<!--                            <input type="hidden" name="_method" value="delete" />-->
+<!--                            <button type="submit">Delete</button>-->
+<!--                        </form>-->
+
                     </div>
+
                 </div>
             </div>
         </div>

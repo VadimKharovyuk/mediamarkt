@@ -27,7 +27,7 @@ public class Category  implements Serializable {
 
 
     @JsonIgnore // Это поле будет исключено из процесса сериализации
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
 
 
