@@ -1,23 +1,10 @@
-spring:
-  application:
-    name: mediamarkt
-
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres-db:5432/mediamarkt
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-  data:
-    redis:
-      host: ${SPRING_REDIS_HOST}
-      port: ${SPRING_REDIS_PORT}
-
-server:
-  port: 8080
+#spring:
+#  redis:
+#    host: mediamarkt-redis-1 # Имя хоста контейнера Redis
+#    port: 6379 # Порт Redis
+#
+#  datasource:
+#    url: jdbc:postgresql://mediamarkt-postgres-db-1:5432/mediamarkt # URL для подключения к базе данных PostgreSQL
+#    username: myusername # Имя пользователя базы данных PostgreSQL
+#    password: mypassword # Пароль пользователя базы данных PostgreSQL
+#    driver-class-name: org.postgresql.Driver # Драйвер JDBC для PostgreSQL

@@ -2,7 +2,6 @@ package com.example.mediamarkt.controller;
 
 import com.example.mediamarkt.model.Category;
 import com.example.mediamarkt.model.Product;
-import com.example.mediamarkt.repository.ProductRepository;
 import com.example.mediamarkt.service.CategoryService;
 import com.example.mediamarkt.service.ProductAdditionService;
 import com.example.mediamarkt.service.ProductService;

@@ -7,6 +7,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,14 +20,22 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CacheManager cacheManager;
 
-
     @Cacheable(value = "searchProductsByName", key = "#name")
     public List<Product> searchProductsByName(String name) {
-        try (Jedis jedis = new Jedis("localhost", 6379)) {
-            for (String key : jedis.keys("searchProductsByName*")) {
-                jedis.expire(key, 60);
+        try {
+            // Пытаемся подключиться к Redis
+            try (Jedis jedis = new Jedis("redis", 6379)) {
+                for (String key : jedis.keys("searchProductsByName*")) {
+                    jedis.expire(key, 60);
+                }
             }
+        } catch (JedisConnectionException e) {
+            // Если не удалось подключиться к Redis, обрабатываем исключение
+            System.out.println("Ошибка подключения к Redis. Подключение к базе данных...");
+            // Возвращаем результат из базы данных
+            return productRepository.findByNameContainingIgnoreCase(name);
         }
+        // Если подключение к Redis прошло успешно, возвращаем результат из кеша
         return productRepository.findByNameContainingIgnoreCase(name);
     }
 
@@ -35,15 +44,26 @@ public class ProductService {
         return productRepository.save(product);
 
     }
+
     @Cacheable(key = "#id", value = "getProductById")
     public Optional<Product> getProductById(Long id) {
-        try (Jedis jedis = new Jedis("localhost", 6379)) {
-            for (String key : jedis.keys("getProductById*")) {
-                jedis.expire(key, 60);
+        try {
+            // Пытаемся подключиться к Redis
+            try (Jedis jedis = new Jedis("redis", 6379)) {
+                for (String key : jedis.keys("getProductById*")) {
+                    jedis.expire(key, 60);
+                }
             }
+        } catch (JedisConnectionException e) {
+            // Если не удалось подключиться к Redis, обрабатываем исключение
+            System.out.println("Ошибка подключения к Redis. Подключение к базе данных...");
+            // Возвращаем результат из базы данных
+            return productRepository.findById(id);
         }
+        // Если подключение к Redis прошло успешно, возвращаем результат из кеша
         return productRepository.findById(id);
     }
+
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
