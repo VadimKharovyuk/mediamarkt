@@ -247,60 +247,17 @@
 
 
 <main>
-<!--    <section class="search">-->
-<!--        <h1>Поиск товаров</h1>-->
-<!--        <form action="#" th:action="@{/products/search}" method="get">-->
-<!--            <input type="text" name="name" placeholder="Введите название товара" required />-->
-<!--            <button type="submit">Поиск</button>-->
-<!--        </form>-->
-<!--    </section>-->
 
-    <!-- Здесь будет результат поиска -->
 </main>
-
-<!-- Categories Section -->
 <section class="container mt-5">
     <h2 class="text-center mb-4">Categories</h2>
     <div class="row">
-        <!-- Example Category Card -->
-        <div class="col-md-3 mb-4">
+        <div class="col-md-3 mb-4" th:each="category, iterStat : ${categories}" th:if="${iterStat.index} &lt; 8">
             <div class="card category-card">
-                <img src="/catogoryPic/laptop.webp" class="card-img-top" alt="Category 1">
+                <img th:src="${category.imageUrl}" class="card-img-top" th:alt="${category.name}">
                 <div class="card-body">
-                    <h5 class="card-title">Ноутбуки</h5>
-                    <p class="card-text">Широкий выбор ноутбуков от ведущих брендов. Подходящие модели для работы, учебы и игр. Высокая производительность и новейшие технологии.</p>
-                    <a href="/categories/2" class="btn btn-primary">Смотреть</a>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat for other categories -->
-        <div class="col-md-3 mb-4">
-            <div class="card category-card">
-                <img src="/catogoryPic/coffeMashine.webp" class="card-img-top" alt="Category 2">
-                <div class="card-body">
-                    <h5 class="card-title">Бытовая техника</h5>
-                    <p class="card-text">Все необходимое для вашего дома: пылесосы, стиральные машины, холодильники и микроволновые печи. Качество, энергоэффективность и стильный дизайн.</p>
-                    <a href="/categories/4" class="btn btn-primary">Смотреть</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card category-card">
-                <img src="/catogoryPic/phone.png" class="card-img-top" alt="Category 3">
-                <div class="card-body">
-                    <h5 class="card-title">Мобильные телефоны</h5>
-                    <p class="card-text">Смартфоны от ведущих производителей с отличной производительностью, качественными камерами и длительным временем работы от аккумулятора.</p>
-                    <a href="/categories/1" class="btn btn-primary">Смотреть </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card category-card">
-                <img src="/catogoryPic/аксессуары.png.webp" class="card-img-top" alt="Category 5">
-                <div class="card-body">
-                    <h5 class="card-title">Аксессуары</h5>
-                    <p class="card-text">Стильные и функциональные аксессуары: чехлы, зарядные устройства, наушники и колонки. Защита и улучшение функциональности ваших устройств.</p>
-                    <a href="/categories/6" class="btn btn-primary">Смотреть </a>
+                    <h5 class="card-title" th:text="${category.name}"></h5>
+                    <a th:href="@{/categories/{id}(id=${category.id})}" class="btn btn-primary">Смотреть</a>
                 </div>
             </div>
         </div>
