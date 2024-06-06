@@ -141,10 +141,21 @@ public class ShoppingCartService {
         for (Product product : shoppingCart.getProducts()) {
             BigDecimal price = product.getPrice();
             Long productId = product.getId();
+            Long categoryId = product.getCategory().getId();
 
             Optional<Discount> productDiscount = discountService.getActiveDiscountForProduct(productId);
+            Optional<Discount> categoryDiscount = discountService.getActiveDiscountForCategory(categoryId);
+
             if (productDiscount.isPresent()) {
                 price = price.subtract(productDiscount.get().getAmount());
+                System.out.println("Applied product discount for product ID " + productId + ": " + productDiscount.get().getAmount());
+            } else if (categoryDiscount.isPresent()) {
+                price = price.subtract(categoryDiscount.get().getAmount());
+                System.out.println("Applied category discount for category ID " + categoryId + ": " + categoryDiscount.get().getAmount());
+            }
+
+            if (price.compareTo(BigDecimal.ZERO) < 0) {
+                price = BigDecimal.ZERO;
             }
 
             totalPrice = totalPrice.add(price);
