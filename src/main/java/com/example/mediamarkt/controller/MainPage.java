@@ -46,6 +46,7 @@ public class MainPage {
                                 @RequestParam("maxPrice") BigDecimal maxPrice,
                                 @RequestParam("category") Long categoryId,
                                 Model model) {
+        List<Category> categories = categoryService.findAll();
         List<Product> products;
         if (categoryId != null) {
             products = productService.findProductsByPriceBetweenAndCategory(minPrice, maxPrice, categoryId);
@@ -57,6 +58,7 @@ public class MainPage {
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("categories", categories);
         return "searchResults";
     }
 

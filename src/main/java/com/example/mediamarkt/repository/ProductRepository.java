@@ -14,7 +14,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     List<Product> findByCategoryId(Long categoryId);
 
-    // Поиск товаров с ценой в заданном диапазоне
     @Query("SELECT p FROM Product p WHERE p.price BETWEEN :startPrice AND :endPrice AND p.category.id = :categoryId")
     List<Product> findByPriceBetweenAndCategoryId(@Param("startPrice") BigDecimal startPrice,
                                                   @Param("endPrice") BigDecimal endPrice,
