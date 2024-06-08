@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -77,6 +78,11 @@ public class ProductService {
 
     public List<Product> getProductsByCategoryId(Long categoryId) {
         return productRepository.findByCategoryId(categoryId);
+    }
+
+
+    public List<Product> findProductsByPriceBetweenAndCategory(BigDecimal startPrice, BigDecimal endPrice, Long categoryId) {
+        return productRepository.findByPriceBetweenAndCategoryId(startPrice, endPrice, categoryId);
     }
 
 

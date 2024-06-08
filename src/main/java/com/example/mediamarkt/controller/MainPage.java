@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class MainPage {
 
     private final CategoryService categoryService;
     private final ProductAdditionService  productAdditionService ;
+    private final ProductService productService;
 
 
     @GetMapping("/")
@@ -37,6 +40,24 @@ public class MainPage {
         model.addAttribute("groupedProducts", groupedProducts);
         model.addAttribute("categories", categories);
         return "homePage";
+    }
+    @GetMapping("/searchByPrice")
+    public String searchByPrice(@RequestParam("minPrice") BigDecimal minPrice,
+                                @RequestParam("maxPrice") BigDecimal maxPrice,
+                                @RequestParam("category") Long categoryId,
+                                Model model) {
+        List<Product> products;
+        if (categoryId != null) {
+            products = productService.findProductsByPriceBetweenAndCategory(minPrice, maxPrice, categoryId);
+        } else {
+            products = productService.findProductsByPriceBetweenAndCategory(maxPrice,minPrice,categoryId);
+        }
+
+        model.addAttribute("products", products);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("categoryId", categoryId);
+        return "searchResults";
     }
 
 }
