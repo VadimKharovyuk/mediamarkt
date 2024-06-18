@@ -39,7 +39,7 @@ public class ProductController {
     @GetMapping("/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("categories", categoryService.getAllCategories()); // Предполагается, что у вас есть categoryService для получения всех категорий
+        model.addAttribute("categories", categoryService.getAllCategories()); 
         return "add-product";
     }
 

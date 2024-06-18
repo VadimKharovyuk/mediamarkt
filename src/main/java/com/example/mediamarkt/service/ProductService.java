@@ -5,6 +5,7 @@ import com.example.mediamarkt.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
@@ -24,21 +25,12 @@ public class ProductService {
     @Cacheable(value = "searchProductsByName", key = "#name")
     public List<Product> searchProductsByName(String name) {
         try {
-            // Пытаемся подключиться к Redis
-            try (Jedis jedis = new Jedis("redis", 6379)) {
-                for (String key : jedis.keys("searchProductsByName*")) {
-                    jedis.expire(key, 60);
-                }
-            }
-        } catch (JedisConnectionException e) {
-            // Если не удалось подключиться к Redis, обрабатываем исключение
-            System.out.println("Ошибка подключения к Redis. Подключение к базе данных...");
-            // Возвращаем результат из базы данных
+           return productRepository.findByNameContainingIgnoreCase(name);
+        } catch (DataAccessException e) {
             return productRepository.findByNameContainingIgnoreCase(name);
         }
-        // Если подключение к Redis прошло успешно, возвращаем результат из кеша
-        return productRepository.findByNameContainingIgnoreCase(name);
     }
+
 
     public Product saveProduct(Product product) {
         Objects.requireNonNull(cacheManager.getCache("getProductById")).put(product.getId(), product);
@@ -49,20 +41,10 @@ public class ProductService {
     @Cacheable(key = "#id", value = "getProductById")
     public Optional<Product> getProductById(Long id) {
         try {
-            // Пытаемся подключиться к Redis
-            try (Jedis jedis = new Jedis("redis", 6379)) {
-                for (String key : jedis.keys("getProductById*")) {
-                    jedis.expire(key, 60);
-                }
-            }
-        } catch (JedisConnectionException e) {
-            // Если не удалось подключиться к Redis, обрабатываем исключение
-            System.out.println("Ошибка подключения к Redis. Подключение к базе данных...");
-            // Возвращаем результат из базы данных
+            return productRepository.findById(id);
+        } catch (DataAccessException e) {
             return productRepository.findById(id);
         }
-        // Если подключение к Redis прошло успешно, возвращаем результат из кеша
-        return productRepository.findById(id);
     }
 
 

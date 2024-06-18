@@ -1,6 +1,7 @@
 package com.example.mediamarkt.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,14 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@RedisHash("Product")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product  implements Serializable {
-    private static final long serialVersionUID = 3817784222026364680L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private BigDecimal price;
@@ -35,6 +34,7 @@ public class Product  implements Serializable {
 
     private int stockQuantity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductAddition> productAdditions;
 }

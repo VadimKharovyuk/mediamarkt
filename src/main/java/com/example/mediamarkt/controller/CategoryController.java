@@ -57,7 +57,7 @@ public class CategoryController {
         Optional<Category> category = categoryService.getCategoryById(id);
         if (category.isPresent()) {
             model.addAttribute("category", category.get());
-            return "edit-category"; // Имя шаблона для редактирования категории
+            return "edit-category"; //
         } else {
             return "category-not-found"; // Имя шаблона для отображения ошибки
         }
