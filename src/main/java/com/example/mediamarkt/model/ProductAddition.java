@@ -1,5 +1,6 @@
 package com.example.mediamarkt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class ProductAddition {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private int count;
 }
 
