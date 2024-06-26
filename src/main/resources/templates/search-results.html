@@ -1,139 +1,361 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Результаты поиска</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}" />-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--    <style>-->
+<!--        /* Основные стили */-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            line-height: 1.6;-->
+<!--        }-->
+
+<!--        header nav {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        header nav a {-->
+<!--            margin-right: 15px;-->
+<!--            text-decoration: none;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        header nav a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+
+<!--        main {-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        footer {-->
+<!--            text-align: center;-->
+<!--            padding: 15px;-->
+<!--            background-color: #f0f0f0;-->
+<!--            position: relative;-->
+<!--            width: 100%;-->
+<!--            bottom: 0;-->
+<!--        }-->
+
+<!--        /* Стили для результатов поиска */-->
+<!--        #search-results ul {-->
+<!--            list-style-type: none;-->
+<!--            padding: 0;-->
+<!--            display: flex;-->
+<!--            flex-wrap: wrap;-->
+<!--            gap: 20px;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        #search-results li {-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            align-items: center;-->
+<!--            width: 230px;-->
+<!--            padding: 15px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 10px;-->
+<!--            transition: transform 0.3s, background-color 0.3s;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        #search-results li:hover {-->
+<!--            background-color: #f9f9f9;-->
+<!--            transform: translateY(-5px);-->
+<!--        }-->
+
+<!--        #search-results img {-->
+<!--            width: 100%;-->
+<!--            height: 230px;-->
+<!--            object-fit: cover;-->
+<!--            border-radius: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        #search-results h3 {-->
+<!--            margin: 10px 0;-->
+<!--            font-size: 20px;-->
+<!--            color: #007bff;-->
+<!--        }-->
+
+<!--        #search-results p {-->
+<!--            margin: 5px 0;-->
+<!--            color: #555;-->
+<!--        }-->
+
+<!--        #search-results p.price {-->
+<!--            font-weight: bold;-->
+<!--            color: #000;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <nav>-->
+<!--        <a href="/" th:href="@{/}">Главная</a>-->
+<!--        <a href="/products" th:href="@{/products}">Товары</a>-->
+<!--        <a href="/cart" th:href="@{/cart}">Корзина</a>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--<main>-->
+
+<!--    <section id="search-results">-->
+
+<!--        <h2 style="text-align: center"> Результаты поиска</h2>-->
+<!--        <ul>-->
+<!--            <nav class="col-md-3">-->
+<!--                <h2>Категории</h2>-->
+<!--                <ul class="list-group">-->
+<!--                    <li class="list-group-item" th:each="category : ${categories}">-->
+<!--                        <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+<!--            <li th:each="product : ${products}">-->
+<!--                <div>-->
+<!--                    <img th:src="${product.imageUrl}" alt="Фото товара" />-->
+<!--                    <h3 th:text="${product.name}">Название товара</h3>-->
+<!--                    <p th:text="${product.description}">Описание товара</p>-->
+<!--                    <p class="price" th:text="${product.price}">Цена</p>-->
+<!--                    <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>-->
+<!--                    <div class="add-to-cart mt-3">-->
+<!--                        <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">-->
+<!--                            <button type="submit" class="btn btn-success">Добавить в корзину</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </section>-->
+<!--</main>-->
+
+<!--<footer>-->
+<!--    <p>&copy; 2024 Ваш Интернет-Магазин</p>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Search Results</title>-->
+<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--    <a class="navbar-brand" href="/">Мой Магазин</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/">Главная <span class="sr-only">(текущая)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/cart">Корзина</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/orders/new">Оформить Доставку</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/discounts">Скидки</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div class="container mt-5">-->
+<!--    <div class="row">-->
+<!--        <nav class="col-md-3">-->
+<!--            <h2>Категории</h2>-->
+<!--            <ul class="list-group">-->
+<!--                <li class="list-group-item" th:each="category : ${categories}">-->
+<!--                    <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+
+<!--        <div class="col-md-6">-->
+<!--            <h1>Search Results</h1>-->
+<!--            <p>Products priced between <span th:text="${minPrice}"></span> and <span th:text="${maxPrice}"></span>:</p>-->
+
+<!--            <div th:if="${products != null}">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4 mb-4" th:each="product : ${products}">-->
+<!--                        <div class="card h-100">-->
+<!--                            <img class="card-img-top" th:src="@{${product.imageUrl}}" alt="Product Image"/>-->
+<!--                            <div class="card-body">-->
+<!--                                <h3 class="card-title" th:text="${product.name}"></h3>-->
+<!--                                <p class="card-text" th:text="${product.description}"></p>-->
+<!--                                <p class="card-text">Price: <span th:text="${product.price}"></span></p>-->
+<!--                                <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div th:if="${products == null || products.size() == 0}">-->
+<!--                <p>No products found in this price range.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-3">-->
+<!--            <div class="searchByPrice mt-4">-->
+<!--                <form action="#" th:action="@{/searchByPrice}" method="get" class="form-inline">-->
+<!--                    <div class="form-group mr-2">-->
+<!--                        <label for="minPrice" class="mr-2">Min Price:</label>-->
+<!--                        <input type="text" id="minPrice" name="minPrice" class="form-control"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group mr-2">-->
+<!--                        <label for="maxPrice" class="mr-2">Max Price:</label>-->
+<!--                        <input type="text" id="maxPrice" name="maxPrice" class="form-control"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group mr-2">-->
+<!--                        <label for="category" class="mr-2">Category:</label>-->
+<!--                        <select id="category" name="category" class="form-control">-->
+<!--                            <option value="">Select Category</option>-->
+<!--                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Search</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Результаты поиска</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Search Results</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Основные стили */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-
-        header nav {
-            margin-bottom: 20px;
-        }
-
-        header nav a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        header nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #f0f0f0;
-            position: relative;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Стили для результатов поиска */
-        #search-results ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        #search-results li {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 230px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            transition: transform 0.3s, background-color 0.3s;
-            text-align: center;
-        }
-
-        #search-results li:hover {
-            background-color: #f9f9f9;
-            transform: translateY(-5px);
-        }
-
-        #search-results img {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        #search-results h3 {
-            margin: 10px 0;
-            font-size: 20px;
-            color: #007bff;
-        }
-
-        #search-results p {
-            margin: 5px 0;
-            color: #555;
-        }
-
-        #search-results p.price {
-            font-weight: bold;
-            color: #000;
+        /* Дополнительные стили для компенсации ширины */
+        @media (min-width: 768px) {
+            .col-md-3 {
+                flex: 0 0 25%; /* Устанавливаем ширину 25% на экранах md и выше */
+                max-width: 25%;
+            }
+            .col-md-6 {
+                flex: 0 0 50%; /* Устанавливаем ширину 50% на экранах md и выше */
+                max-width: 50%;
+            }
         }
     </style>
 </head>
 <body>
-<header>
-    <nav>
-        <a href="/" th:href="@{/}">Главная</a>
-        <a href="/products" th:href="@{/products}">Товары</a>
-        <a href="/cart" th:href="@{/cart}">Корзина</a>
-    </nav>
-</header>
 
-<main>
-
-    <section id="search-results">
-
-        <h2 style="text-align: center"> Результаты поиска</h2>
-        <ul>
-            <nav class="col-md-3">
-                <h2>Категории</h2>
-                <ul class="list-group">
-                    <li class="list-group-item" th:each="category : ${categories}">
-                        <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>
-                    </li>
-                </ul>
-            </nav>
-            <li th:each="product : ${products}">
-                <div>
-                    <img th:src="${product.imageUrl}" alt="Фото товара" />
-                    <h3 th:text="${product.name}">Название товара</h3>
-                    <p th:text="${product.description}">Описание товара</p>
-                    <p class="price" th:text="${product.price}">Цена</p>
-                    <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
-                    <div class="add-to-cart mt-3">
-                        <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method="post">
-                            <button type="submit" class="btn btn-success">Добавить в корзину</button>
-                        </form>
-                    </div>
-                </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Мой Магазин</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Главная <span class="sr-only">(текущая)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">Корзина</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders/new">Оформить Доставку</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/discounts">Скидки</a>
             </li>
         </ul>
-    </section>
-</main>
+    </div>
+</nav>
 
-<footer>
-    <p>&copy; 2024 Ваш Интернет-Магазин</p>
-</footer>
+<div class="container mt-5">
+    <div class="row">
+        <nav class="col-md-2">
+            <h2>Категории</h2>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="category : ${categories}">
+                    <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}"></a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="col-md-6">
+            <h1>Search Results</h1>
+            <p>Товары в диапазоне цен от <span th:text="${minPrice}"></span> до <span th:text="${maxPrice}"></span>:</p>
+
+            <div th:if="${products != null}">
+                <div class="row">
+                    <div class="col-md-4 mb-4" th:each="product : ${products}">
+                        <div class="card h-100">
+                            <img class="card-img-top" th:src="@{${product.imageUrl}}" alt="Product Image"/>
+                            <div class="card-body">
+                                <h3 class="card-title" th:text="${product.name}"></h3>
+                                <p class="card-text" th:text="${product.description}"></p>
+                                <p class="card-text">Цена: <span th:text="${product.price}"></span></p>
+                                <a th:href="@{/products/products/{id}(id=${product.id})}" class="btn btn-primary">Посмотреть продукт</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${products == null || products.size() == 0}">
+                <p>В данном диапазоне цен товары не найдены.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="searchByPrice mt-4">
+                <form action="#" th:action="@{/searchByPrice}" method="get" class="form-inline">
+                    <div class="form-group mr-2">
+                        <label for="minPrice" class="mr-2">Мин. цена:</label>
+                        <input type="text" id="minPrice" name="minPrice" class="form-control"/>
+                    </div>
+                    <div class="form-group mr-2">
+                        <label for="maxPrice" class="mr-2">Макс. цена:</label>
+                        <input type="text" id="maxPrice" name="maxPrice" class="form-control"/>
+                    </div>
+                    <div class="form-group mr-2">
+                        <label for="category" class="mr-2">Категория:</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="">Выберите категорию</option>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+

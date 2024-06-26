@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical; /* Позволяет изменять размер по вертикали */
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar {
+            background-color: #fff; /* Цвет фона навигационного меню */
+            border-bottom: 1px solid #ccc; /* Граница снизу */
+            padding: 10px 20px; /* Отступы внутри навигационного меню */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; /* Размер шрифта логотипа */
+            color: #333; /* Цвет текста логотипа */
+        }
+
+        .navbar-nav {
+            margin-left: auto; /* Выравнивание элементов навигации вправо */
+        }
+
+        .navbar-nav .nav-link {
+            color: #333; /* Цвет текста ссылок */
+            margin-right: 10px; /* Отступ между ссылками */
+        }
+
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline; /* Подчеркивание при наведении */
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Мой Магазин</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Главная <span class="sr-only">(текущая)</span></a>
+            </li>
+            <li class="nav-item">
+                <form class="search-form" action="#" th:action="@{/products/search}" method="get">
+                    <input type="text" name="name" class="form-control search-input"
+                           placeholder="Введите название товара" required/>
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">Корзина</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders/new">Оформить Доставку</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/discounts">Скидки</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1>Send Messages</h1>
+<form action="/sendMessages" method="post">
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

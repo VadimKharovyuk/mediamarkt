@@ -200,10 +200,10 @@
 </head>
 <body>
 
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Мой Магазин</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/messagesSent">Мой Магазин</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -213,16 +213,19 @@
             </li>
             <li class="nav-item">
                 <form class="search-form" action="#" th:action="@{/products/search}" method="get">
-                    <input type="text" name="name" class="form-control search-input" placeholder="Введите название товара" required />
+                    <input type="text" name="name" class="form-control search-input"
+                           placeholder="Введите название товара" required/>
                     <button type="submit" class="btn btn-primary">Поиск</button>
                 </form>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Категории
                 </a>
                 <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                    <a class="dropdown-item" th:each="category : ${categories}" th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Категория</a>
+                    <a class="dropdown-item" th:each="category : ${categories}"
+                       th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Категория</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -236,7 +239,13 @@
             </li>
         </ul>
     </div>
+    <form action="/subscribe" method="post" class="form-inline ml-auto">
+        <label class="sr-only" for="email">Введите ваш email:</label>
+        <input type="email" id="email" name="email" class="form-control mr-sm-2" placeholder="Подписка" required>
+        <button type="submit" class="btn btn-primary">Подписаться</button>
+    </form>
 </nav>
+
 
 <!-- Hero Section -->
 <header class="jumbotron jumbotron-fluid">
