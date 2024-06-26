@@ -19,6 +19,6 @@ public class EmailListener {
         message.setSubject(emailMessage.getSubject());
         message.setText(emailMessage.getText());
         mailSender.send(message);
-        System.out.println("Отработала emailSendMediaMarcket-queue "+emailMessage.getText() );
+        System.out.println("Отработала emailSendMediaMarcket-queue "+emailMessage.getTo() );
     }
 }
