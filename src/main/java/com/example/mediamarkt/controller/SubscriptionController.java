@@ -39,7 +39,8 @@ public class SubscriptionController {
     }
 
     @PostMapping("/sendMessages")
-    public String sendMessages(@RequestParam("message") String message, RedirectAttributes redirectAttributes) {
+    public String sendMessages(@RequestParam("message") String message,
+                               RedirectAttributes redirectAttributes) {
         // Получить все подписки
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
 
