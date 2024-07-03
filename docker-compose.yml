@@ -1,3 +1,61 @@
+#
+#version: '3.8'
+#
+#services:
+#  mediamarkt-app:
+#    container_name: mediamarkt-app
+#    build: .
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      spring.application.name: mediamarkt
+#      server.port: 8081
+#      data.source.driver-class-name: org.postgresql.Driver
+#      spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+#      spring.datasource.username: postgres
+#      spring.datasource.password: 19111993
+#      spring.datasource.url: jdbc:postgresql://postgres:5432/mediamarkt
+#      spring.jpa.show-sql: "true"
+#      spring.jpa.hibernate.ddl-auto: update
+#      spring.data.redis.host: redis
+#      spring.data.redis.port: 6379
+#      spring.rabbitmq.host: rabbitmq
+#      spring.rabbitmq.port: 5672
+#      spring.rabbitmq.username: guest
+#      spring.rabbitmq.password: guest
+#    depends_on:
+#      - redis
+#      - postgres
+#      - rabbitmq
+#
+#  postgres:
+#    container_name: mediamarkt-postgres
+#    image: postgres
+#    environment:
+#      POSTGRES_DB: mediamarkt
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 19111993
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data
+#
+#  redis:
+#    container_name: mediamarkt-redis
+#    image: redis
+#    ports:
+#      - "6379:6379"
+#
+#  rabbitmq:
+#    container_name: mediamarkt-rabbitmq
+#    image: rabbitmq:management
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#
+#volumes:
+#  postgres-data:
+
 
 version: '3.8'
 
@@ -23,6 +81,9 @@ services:
       spring.rabbitmq.port: 5672
       spring.rabbitmq.username: guest
       spring.rabbitmq.password: guest
+      spring.flyway.enabled: "true"
+      spring.flyway.locations: classpath:db/migration
+      spring.flyway.baseline-on-migrate: "true"
     depends_on:
       - redis
       - postgres

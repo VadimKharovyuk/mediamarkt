@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Product  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
