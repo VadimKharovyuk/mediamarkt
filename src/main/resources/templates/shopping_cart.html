@@ -65,12 +65,18 @@
                             <p class="card-text" th:text="${product.description}">Описание продукта</p>
                             <p class="card-text"><strong th:text="${product.price}">Цена продукта</strong></p>
                         </div>
+
                     </div>
                 </div>
                 <h3 class="text-right col-12">Общая стоимость: <span th:text="${totalPrice}">0.00</span> грн.</h3>
             </div>
-            <a class="btn btn-primary" href="/orders/new">Create New Order</a>
+            <a class="btn btn-primary" href="/orders/new">Create New Order</a><br><br>
+
+            <form action="/cart/clear" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Очистить корзину</button>
+            </form>
             <div th:if="${shoppingCart == null || shoppingCart.products.isEmpty()}">
+
                 <p>Ваша корзина пуста.</p>
             </div>
         </div>

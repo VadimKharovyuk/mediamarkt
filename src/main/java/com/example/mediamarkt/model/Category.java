@@ -24,7 +24,7 @@ public class Category  implements Serializable {
     private String imageUrl;
 
 
-    @JsonIgnore // Это поле будет исключено из процесса сериализации
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
 

@@ -163,4 +163,12 @@ public class ShoppingCartService {
 
         return totalPrice;
     }
+    public void cleanCard(Product product,ShoppingCart shoppingCart){
+        product.setPrice(BigDecimal.ZERO);
+        shoppingCart.getProducts().clear();
+
+
+
+    }
+
 }

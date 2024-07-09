@@ -24,6 +24,7 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
     private final ProductAdditionService productAdditionService;
+
     @GetMapping()
     public String viewShoppingCart(Model model, HttpSession session) {
         ShoppingCart shoppingCart = shoppingCartService.getCartFromSession(session);
@@ -58,5 +59,17 @@ public class ShoppingCartController {
     public String removeShoppingCart(@PathVariable("id") Long id) {
         shoppingCartService.deleteShoppingCart(id);
         return "redirect:/cart"; // Перенаправляем на страницу корзины
+    }
+
+
+    @PostMapping("/clear")
+    public String clearCard(Product product, HttpSession httpSession) {
+        ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("shoppingCart");
+        if (shoppingCart != null) {
+            shoppingCartService.cleanCard(product, shoppingCart);
+            httpSession.setAttribute("shoppingCart", shoppingCart);
+        }
+        return "redirect:/cart";
+
     }
 }
